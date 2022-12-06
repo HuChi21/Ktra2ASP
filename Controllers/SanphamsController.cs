@@ -7,8 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Ktra2ASP.Models;
-using PagedList;
-using WebGrease.Css.Ast;
 
 namespace Ktra2ASP.Controllers
 {
@@ -17,10 +15,9 @@ namespace Ktra2ASP.Controllers
         private Model1 db = new Model1();
 
         // GET: Sanphams
-        public ActionResult Index(string sortOrder,string SearchString,string currentFilter, int? page)
+        public ActionResult Index(string sortOrder,string SearchString)
         {
             //sap xep
-            ViewBag.CurrentSort = sortOrder;
             ViewBag.Xeptheoten = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.Xeptheogia = sortOrder == "Giatien" ? "gia_desc" : "Giatien";
 
@@ -46,19 +43,7 @@ namespace Ktra2ASP.Controllers
                     break;
 
             }
-
-            if(SearchString != null ){
-                page = 1;
-            }
-            else
-            {
-                SearchString = currentFilter;
-            }
-            ViewBag.CurrentFilter = SearchString;
-            int pageSize = 3;
-            int pageNum = (page ?? 1);
-
-            return View(sanphams.ToPagedList(pageNum, pageSize));
+            return View(sanphams.ToList());
         }
 
         // GET: Sanphams/Details/5

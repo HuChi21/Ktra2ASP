@@ -1,6 +1,4 @@
-﻿@model PagedList.IPagedList<Ktra2ASP.Models.Sanpham>
-@using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+﻿@model IEnumerable<Ktra2ASP.Models.Sanpham>
 
 @{
     ViewBag.Title = "Index";
@@ -9,7 +7,7 @@
 <h2>Danh sách sản phẩm</h2>
 @using (Html.BeginForm())
             {
-                <p>Tìm kiếm @Html.TextBox("SearchString",ViewBag.CurrentFilter as string) <input type="submit" value="Tìm kiếm" /></p>               
+                <p>Tìm kiếm @Html.TextBox("SearchString") <input type="submit" value="Tìm kiếm" /></p>               
             }
 <p>
     @Html.ActionLink("Tạo mới", "Create")
@@ -20,7 +18,7 @@
             @Html.DisplayNameFor(model => model.Danhmuc.TenDanhmuc)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Tenvd)
+            @Html.ActionLink("Tên vật tư","Index", new {sortOrder = ViewBag.Xeptheoten})
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TenAnh)
@@ -29,7 +27,7 @@
             @Html.DisplayNameFor(model => model.Mota)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Giatien)
+            @Html.ActionLink("Giá tiền", "Index", new { sortOrder = ViewBag.Xeptheogia})
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Soluong)
