@@ -1,0 +1,73 @@
+﻿@model PagedList.IPagedList<Ktra2ASP.Models.Sanpham>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Danh sách sản phẩm</h2>
+@using (Html.BeginForm())
+            {
+                <p>Tìm kiếm @Html.TextBox("SearchString",ViewBag.CurrentFilter as string) <input type="submit" value="Tìm kiếm" /></p>               
+            }
+<p>
+    @Html.ActionLink("Tạo mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Danhmuc.TenDanhmuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tenvd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenAnh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mota)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Giatien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Soluong)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Danhmuc.TenDanhmuc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tenvd)
+        </td>
+        <td>
+            @{ 
+                string ImagePath = "~/Images/" + item.TenAnh;
+            }
+            <img src="@Url.Content(ImagePath)" width="180"/>
+            <br/>
+            @Html.DisplayFor(modelItem => item.TenAnh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mota)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Giatien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Soluong)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Mavd }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Mavd }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Mavd })
+        </td>
+    </tr>
+}
+
+</table>
